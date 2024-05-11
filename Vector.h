@@ -25,6 +25,8 @@ public:
 
 	T& operator[](const size_t&);
 
+	const T& operator[](const size_t&) const;
+
 	void push_back(T);
 
 	void pop_back();
@@ -32,6 +34,8 @@ public:
 	void clear();
 
 	size_t capacity() const;
+	
+	void set_capacity(size_t);
 
 	size_t size() const;
 

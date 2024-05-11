@@ -46,12 +46,27 @@ Vector<T>::~Vector() {
 
 template<typename T>
 T& Vector<T>::operator[](const size_t& ind) {
+	if(ind < 0 || ind >= _capacity) {
+		throw "Index not found";
+		abort();
+	}
+
 	if(ind > _size && ind < _capacity)
 		_size = ind;
 
 	return _data[ind];
 }
-	
+
+template<typename T>
+const T& Vector<T>::operator[](const size_t& ind) const {
+	if(ind < 0 || ind >= _capacity){
+		throw "Index not found";
+		abort();
+	}
+
+	return _data[ind];
+}
+
 template<typename T>
 void Vector<T>::push_back(T data) {
 	if(_size >= _capacity)
@@ -71,7 +86,25 @@ void Vector<T>::clear() {
 	delete[] _data;
 	_size = 0;
 	_capacity = 1;
-	_data = new T[_capacity];
+	_data = new T[_capacity] {0};
+}
+
+template<typename T>
+size_t Vector<T>::capacity() const {
+	return _capacity;
+}
+
+template<typename T>
+void Vector<T>::set_capacity(size_t size) {
+	delete[] _data;
+	_size = 0;
+	_capacity = size;
+	_data = new T[_capacity] {0};
+}
+
+template<typename T>
+size_t Vector<T>::size() const {
+	return _size;
 }
 
 template<typename T>
